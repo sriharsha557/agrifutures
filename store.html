@@ -243,6 +243,13 @@
             position: relative; overflow: hidden;
         }
 
+        .card-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .card-emoji {
             font-size: 5rem;
             filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
@@ -868,14 +875,14 @@
 
     // ── PRODUCT DATA ───────────────────────────────────────────────────
     const PRODUCTS = [
-        { id:1,  category:'dates',   badge:'premium', name:'Medjool Dates',         desc:'Large, caramel-soft kings of the date world. Perfect for gifting and snacking.',             price:599,  weight:'500g', emoji:'🌴' },
-        { id:2,  category:'dates',   badge:'premium', name:'Ajwa Dates',             desc:'Revered premium dates from Medina. Deeply rich in nutrients and soulful flavour.',          price:899,  weight:'250g', emoji:'⭐' },
-        { id:3,  category:'dates',   badge:null,      name:'Deglet Noor Dates',      desc:'Semi-dry with a delicate honey sweetness. The baker\'s favourite date variety.',             price:449,  weight:'500g', emoji:'🌾' },
-        { id:4,  category:'dates',   badge:'new',     name:'Barhi Dates',            desc:'Soft, creamy texture with a butterscotch-caramel character unlike any other.',              price:699,  weight:'400g', emoji:'🍯' },
-        { id:5,  category:'dates',   badge:null,      name:'Zahidi Dates',           desc:'Firm with a mild, nutty sweetness. Excellent for cooking and chai pairings.',               price:399,  weight:'500g', emoji:'🌿' },
-        { id:6,  category:'berries', badge:'new',     name:'Blueberry Harvest',      desc:'Antioxidant-rich, grown in the Amaravati region. Tart, juicy, and deeply nutritious.',      price:799,  weight:'200g', emoji:'🫐' },
-        { id:7,  category:'berries', badge:null,      name:'Mulberry Pack',          desc:'Sweet-tart sun-dried mulberries. Rare to the Indian market, packed with iron.',             price:549,  weight:'250g', emoji:'🍇' },
-        { id:8,  category:'nuts',    badge:null,      name:'Dry Fruit Assortment',   desc:'Premium walnuts, almonds and cashews — hand-selected and organically grown.',               price:999,  weight:'500g', emoji:'🥜' },
+        { id:1,  category:'dates',   badge:'premium', name:'Medjool Dates',         desc:'Large, caramel-soft kings of the date world. Perfect for gifting and snacking.',             price:599,  weight:'500g', emoji:'🌴', image:'assets/Medjool Dates.jpg' },
+        { id:2,  category:'dates',   badge:'premium', name:'Ajwa Dates',             desc:'Revered premium dates from Medina. Deeply rich in nutrients and soulful flavour.',          price:899,  weight:'250g', emoji:'⭐', image:'assets/Ajwa Dates.jpg' },
+        { id:3,  category:'dates',   badge:null,      name:'Deglet Noor Dates',      desc:'Semi-dry with a delicate honey sweetness. The baker\'s favourite date variety.',             price:449,  weight:'500g', emoji:'🌾', image:'assets/Deglet Noor Dates.jpg' },
+        { id:4,  category:'dates',   badge:'new',     name:'Barhi Dates',            desc:'Soft, creamy texture with a butterscotch-caramel character unlike any other.',              price:699,  weight:'400g', emoji:'🍯', image:'assets/Barhi Dates.png' },
+        { id:5,  category:'dates',   badge:null,      name:'Zahidi Dates',           desc:'Firm with a mild, nutty sweetness. Excellent for cooking and chai pairings.',               price:399,  weight:'500g', emoji:'🌿', image:'assets/Zahidi Dates.jpg' },
+        { id:6,  category:'berries', badge:'new',     name:'Blueberry Harvest',      desc:'Antioxidant-rich, grown in the Amaravati region. Tart, juicy, and deeply nutritious.',      price:799,  weight:'200g', emoji:'🫐', image:'assets/Blueberry Harvest.png' },
+        { id:7,  category:'berries', badge:null,      name:'Mulberry Pack',          desc:'Sweet-tart sun-dried mulberries. Rare to the Indian market, packed with iron.',             price:549,  weight:'250g', emoji:'🍇', image:'assets/Mulberry Pack.jpg' },
+        { id:8,  category:'nuts',    badge:null,      name:'Dry Fruit Assortment',   desc:'Premium walnuts, almonds and cashews — hand-selected and organically grown.',               price:999,  weight:'500g', emoji:'🥜', image:'assets/Dry Fruit Assortment.jpg' },
         { id:9,  category:'nuts',    badge:'new',     name:'Pumpkin & Flax Seeds',   desc:'Omega-rich superfood seeds. Cold-pressed and gently dried for maximum nutrition.',          price:349,  weight:'300g', emoji:'🌱' },
         { id:10, category:'herbs',   badge:null,      name:'Moringa Powder',         desc:'The "miracle tree" powder — 92 nutrients in one green spoonful. Farm-fresh & organic.',     price:399,  weight:'200g', emoji:'🌿' },
         { id:11, category:'herbs',   badge:null,      name:'Rare Spice Collection',  desc:'Hand-curated spice kit with black cardamom, star anise, and exotic regional blends.',       price:649,  weight:'150g', emoji:'🌶️' },
@@ -904,7 +911,7 @@
             return `
             <div class="product-card" id="card-${p.id}">
                 <div class="card-image">
-                    <span class="card-emoji">${p.emoji}</span>
+                    ${p.image ? `<img class="card-photo" src="${p.image}" alt="${p.name}">` : `<span class="card-emoji">${p.emoji}</span>`}
                     ${p.badge ? `<span class="card-badge ${p.badge}">${p.badge}</span>` : ''}
                 </div>
                 <div class="card-body">
