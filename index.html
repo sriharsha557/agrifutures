@@ -1492,8 +1492,10 @@ body {
         // Add smooth scrolling to all nav links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href') || '';
+                if (!href.startsWith('#')) return;
                 e.preventDefault();
-                const targetId = link.getAttribute('href').substring(1);
+                const targetId = href.substring(1);
                 scrollToSection(targetId);
             });
         });
